@@ -15,17 +15,23 @@ namespace BaltaBlog_Desafio.Screens
             Console.Clear();
             Console.WriteLine("Lista de usuários");
             Console.WriteLine("-------------");
-            List();
+            ListWithRoles();
             Console.ReadKey();
             MenuUserScreen.Load();
         }
 
-        private static void List()
+        private static void ListWithRoles()
         {
-            var repository = new Repository<User>(Database.Connection);
-            var users = repository.Get();
+            var repository = new UserRepository(Database.Connection);
+            var users = repository.ReadWithRole();
             foreach (var item in users)
-                Console.WriteLine($"{item.Id} - {item.Name} - {item.Email} ({item.Bio}) - ({item.Slug})");
+            {
+                Console.Write($"Id: {item.Id} - Name: {item.Name} - Email: {item.Email} - Bio: {item.Bio} - Slug: {item.Slug} ");
+
+                foreach (var role in item.Roles)
+                    Console.WriteLine($"Role: {role?.Name}");
+            }
+            Console.WriteLine();
         }
     }
 }

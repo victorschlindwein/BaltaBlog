@@ -58,7 +58,7 @@ namespace BaltaBlog_Desafio.Screens.UserScreens
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Não foi possível salvar a tag");
+                Console.WriteLine("Não foi possível salvar o usuário");
                 Console.WriteLine(ex.Message);
             }
         }
